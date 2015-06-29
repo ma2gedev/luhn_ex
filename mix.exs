@@ -3,8 +3,14 @@ defmodule Luhn.Mixfile do
 
   def project do
     [app: :luhn,
-     version: "0.0.1",
+     version: "0.1.0",
      elixir: "~> 1.0",
+     description: "Luhn algorithm in Elixir",
+     package: [
+       contributors: ["Takayuki Matsubara"],
+       licenses: ["MIT"],
+       links: %{"GitHub" => "https://github.com/ma2gedev/luhn_ex"}
+     ],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
