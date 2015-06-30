@@ -1,12 +1,12 @@
 defmodule LuhnTest do
   use ExUnit.Case
 
-  test "America Express" do
+  test "American Express" do
     assert Luhn.valid? "378282246310005"
     assert Luhn.valid? "371449635398431"
   end
   
-  test "America Express Corporate" do
+  test "American Express Corporate" do
     assert Luhn.valid? "378734493671000"
   end
   
@@ -42,5 +42,11 @@ defmodule LuhnTest do
 
   test "Integer" do
     assert Luhn.valid? 4111111111111111
+  end
+
+  test "Invalid numbers" do
+    assert !Luhn.valid? "123456789123456"
+    assert !Luhn.valid? 123456789123456
+    assert !Luhn.valid? "4111111511111112"
   end
 end
