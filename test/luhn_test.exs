@@ -43,4 +43,10 @@ defmodule LuhnTest do
   test "Integer" do
     assert Luhn.valid? 4111111111111111
   end
+
+  test "Invalid numbers" do
+    assert !Luhn.valid? "123456789123456"
+    assert !Luhn.valid? 123456789123456
+    assert !Luhn.valid? "4111111511111112"
+  end
 end
