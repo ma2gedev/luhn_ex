@@ -10,7 +10,7 @@ Validate Luhn number.
 # mix.exs
 defp deps do
   [
-    {:luhn, "~> 0.1.0"}
+    {:luhn, "~> 0.2.0"}
   ]
 end
 
