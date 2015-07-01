@@ -13,13 +13,13 @@ defmodule Luhn do
   def checksum(number) do
     String.split(number, "", trim: true)
     |> Enum.reduce([], fn(n, acc) -> [String.to_integer(n)|acc] end)
-    |> Enum.with_index
-    |> Enum.reduce(0, &double/2)
+    |> double
     |> rem 10
   end
 
-  defp double({number, index}, acc) when Integer.is_odd(index), do: acc + sum(number * 2)
-  defp double({number, index}, acc) when Integer.is_even(index), do: acc + number
+  defp double([]), do: 0
+  defp double([x]), do: x
+  defp double([x,y|tail]), do: x + sum(y * 2) + double(tail)
 
   defp sum(number) when number >= 10, do: number - 9
   defp sum(number), do: number
