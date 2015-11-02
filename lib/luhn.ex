@@ -1,36 +1,34 @@
 defmodule Luhn do
   require Integer
 
-  @spec valid?(integer, 2..36, 2..36 | nil) :: boolean
-  def valid?(number, base \\ 10, mod \\ nil) do
-    checksum(number, base, mod)
+  @spec valid?(integer, 2..36) :: boolean
+  def valid?(number, base \\ 10) do
+    checksum(number, base)
     |> Kernel.== 0
   end
 
-  def checksum(number, base \\ 10, mod \\ nil)
+  def checksum(number, base \\ 10)
 
-  @spec checksum(integer, 2..36, 2..36 | nil) :: integer
-  def checksum(number, base, mod) when is_integer(number) do
+  @spec checksum(integer, 2..36) :: integer
+  def checksum(number, base) when is_integer(number) do
     number
     |> Integer.to_string(base)
-    |> checksum(base, mod)
+    |> checksum(base)
   end
 
-  @spec checksum(String.t, 2..36, 2..36 | nil) :: integer
-  def checksum(number, base, mod) do
-    mod = mod || base
-
+  @spec checksum(String.t, 2..36) :: integer
+  def checksum(number, base) do
     number
     |> String.split("", trim: true)
     |> Enum.reduce([], fn(n, acc) -> [String.to_integer(n, base)|acc] end)
-    |> double(mod)
-    |> rem mod
+    |> double(base)
+    |> rem base
   end
 
   defp double([], _), do: 0
   defp double([x], _), do: x
-  defp double([x,y|tail], mod), do: x + sum(y * 2, mod) + double(tail, mod)
+  defp double([x,y|tail], base), do: x + sum(y * 2, base) + double(tail, base)
 
-  defp sum(number, mod) when number >= mod, do: sum(number - mod + 1, mod)
+  defp sum(number, base) when number >= base, do: number - base + 1
   defp sum(number, _), do: number
 end
