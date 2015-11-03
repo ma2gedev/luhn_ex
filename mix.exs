@@ -3,7 +3,7 @@ defmodule Luhn.Mixfile do
 
   def project do
     [app: :luhn,
-     version: "0.2.0",
+     version: "0.3.0",
      elixir: "~> 1.0",
      description: "Luhn algorithm in Elixir",
      package: [
