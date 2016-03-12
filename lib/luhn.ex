@@ -21,13 +21,13 @@ defmodule Luhn do
     number
     |> String.split("", trim: true)
     |> Enum.reduce([], fn(n, acc) -> [String.to_integer(n, base)|acc] end)
-    |> double(base)
+    |> double(base, 0)
     |> rem base
   end
 
-  defp double([], _), do: 0
-  defp double([x], _), do: x
-  defp double([x,y|tail], base), do: x + sum(y * 2, base) + double(tail, base)
+  def double([], _, acc), do: acc
+  def double([x], _, acc), do: x + acc
+  def double([x,y|tail], base, acc), do: double(tail, base, acc + x + sum(y * 2, base))
 
   defp sum(number, base) when number >= base, do: number - base + 1
   defp sum(number, _), do: number
