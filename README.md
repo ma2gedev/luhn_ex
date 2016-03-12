@@ -33,7 +33,8 @@ Luhn.valid? 378282246310005
 ## Benchmarking
 
 ```
-$ mix archive.install https://github.com/alco/benchfella/releases/download/v0.2.1/benchfella-0.2.1.ez
+$ MIX_ENV=bench mix deps.get
+$ MIX_ENV=bench mix compile
 $ mix bench
 ```
 

@@ -35,6 +35,7 @@ defmodule Luhn.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [{:excoveralls, "~> 0.3", only: :dev},
-     {:power_assert, "~> 0.0.3", only: :test}]
+     {:power_assert, "~> 0.0.3", only: :test},
+     {:benchfella, "~> 0.3", only: :bench}]
   end
 end
