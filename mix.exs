@@ -14,7 +14,7 @@ defmodule Luhn.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      test_coverage: [tool: ExCoveralls],
-     deps: deps]
+     deps: deps()]
   end
 
   # Configuration for the OTP application
@@ -35,7 +35,6 @@ defmodule Luhn.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [{:excoveralls, "~> 0.3", only: :dev},
-     {:power_assert, "~> 0.0.3", only: :test},
      {:benchfella, "~> 0.3", only: :bench}]
   end
 end
