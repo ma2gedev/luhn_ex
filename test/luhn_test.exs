@@ -59,4 +59,9 @@ defmodule LuhnTest do
     assert !Luhn.valid? "abc12392b", 16
     assert !Luhn.valid? "abc123a", 16
   end
+
+  test "Invalid random string" do
+    assert !Luhn.valid? "01:00:00:00:00:00*AB", 10
+    assert !Luhn.valid? "01:00:00:00:00:00*AB", 16
+  end
 end
