@@ -4,5 +4,4 @@
   "hackney": {:hex, :hackney, "1.1.0"},
   "idna": {:hex, :idna, "1.0.2"},
   "jsx": {:hex, :jsx, "2.4.0"},
-  "power_assert": {:hex, :power_assert, "0.0.3"},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"}}
