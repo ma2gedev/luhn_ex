@@ -4,7 +4,7 @@ defmodule Luhn do
   @spec valid?(integer, 2..36) :: boolean
   def valid?(number, base \\ 10) do
     checksum(number, base)
-    |> Kernel.== 0
+    |> Kernel.== (0)
   end
 
   def checksum(number, base \\ 10)
@@ -22,7 +22,7 @@ defmodule Luhn do
     |> String.split("", trim: true)
     |> Enum.reduce([], fn(n, acc) -> [String.to_integer(n, base)|acc] end)
     |> double(base, 0)
-    |> rem base
+    |> rem(base)
   end
 
   def double([], _, acc), do: acc
