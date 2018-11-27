@@ -1,8 +1,10 @@
-%{"benchfella": {:hex, :benchfella, "0.3.2"},
-  "excoveralls": {:hex, :excoveralls, "0.3.10"},
-  "exjsx": {:hex, :exjsx, "3.1.0"},
-  "hackney": {:hex, :hackney, "1.1.0"},
-  "idna": {:hex, :idna, "1.0.2"},
-  "jsx": {:hex, :jsx, "2.4.0"},
-  "power_assert": {:hex, :power_assert, "0.0.3"},
-  "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"}}
+%{
+  "benchfella": {:hex, :benchfella, "0.3.2", "b9648e77fa8d8b8b9fe8f54293bee63f7de03909b3af6ab22a0e546716a396fb", [], [], "hexpm"},
+  "excoveralls": {:hex, :excoveralls, "0.3.10", "81e11d06fc6cd38b808c7f0480af738926df85b01195c302a32e07afb2104055", [:mix], [{:exjsx, "~> 3.0", [hex: :exjsx, repo: "hexpm", optional: false]}, {:hackney, ">= 0.12.0", [hex: :hackney, repo: "hexpm", optional: false]}], "hexpm"},
+  "exjsx": {:hex, :exjsx, "3.1.0", "d419162cb2d5be80070835c2c2b8c78c8c45907706c991d23f3750dae506d1e9", [:mix], [{:jsx, "~> 2.4.0", [hex: :jsx, repo: "hexpm", optional: false]}], "hexpm"},
+  "hackney": {:hex, :hackney, "1.1.0", "e999ef5fbd9d199b00953b26cbcb4396402e8e4fca6d2c48501253d98bd63723", [:make, :rebar], [{:idna, "~> 1.0", [hex: :idna, repo: "hexpm", optional: false]}, {:ssl_verify_hostname, "~> 1.0", [hex: :ssl_verify_hostname, repo: "hexpm", optional: false]}], "hexpm"},
+  "idna": {:hex, :idna, "1.0.2", "397e3d001c002319da75759b0a81156bf11849c71d565162436d50020cb7265e", [:make], [], "hexpm"},
+  "jsx": {:hex, :jsx, "2.4.0", "fb83830ac15e981b6ce310b645324ceecd01b1e0847d23921c33df829de5d2db", [:mix], [], "hexpm"},
+  "power_assert": {:hex, :power_assert, "0.1.2", "a3b9f4cbc890b210839d0eeded08050563fc111a06fa4c1470db5151a41520ea", [:mix], [], "hexpm"},
+  "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5", "2e73e068cd6393526f9fa6d399353d7c9477d6886ba005f323b592d389fb47be", [:make], [], "hexpm"},
+}
