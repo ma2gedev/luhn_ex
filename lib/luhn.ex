@@ -4,7 +4,7 @@ defmodule Luhn do
   @spec valid?(integer, 2..36) :: boolean
   def valid?(number, base \\ 10) do
     checksum(number, base)
-    |> Kernel.== (0)
+    |> Kernel.==(0)
   end
 
   def checksum(number, base \\ 10)
