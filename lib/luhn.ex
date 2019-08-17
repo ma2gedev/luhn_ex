@@ -1,7 +1,28 @@
 defmodule Luhn do
+  @moduledoc """
+  Functions for validating Credit Card numbers using Luhn checksums.
 
-  @spec valid?(integer, 2..36) :: boolean
-  def valid?(number, base \\ 10) do
+  Credit card numbers may be of arbitrary length and in arbitrary base.
+  """
+
+  @doc """
+  Evaluates a given credit card number for its validity, with an optionally provided base.
+
+  # Examples
+      # Accepts a string
+      iex(1)> Luhn.valid?("378282246310005")
+      true
+
+      # Or an integer
+      iex(2)> Luhn.valid?(378282246310005)
+      true
+
+      # Works with Hexadecimal as well
+      iex(3)> Luhn.valid?(0x1580BB2EA8875, 16)
+      true
+  """
+  @spec valid?(number :: integer | String.t, base :: 2..36) :: boolean
+  def valid?(number, base \\ 10) when base >= 2 do
     checksum(number, base)
     |> Kernel.==(0)
   end
