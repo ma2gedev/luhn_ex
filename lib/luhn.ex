@@ -1,5 +1,4 @@
 defmodule Luhn do
-  require Integer
 
   @spec valid?(integer, 2..36) :: boolean
   def valid?(number, base \\ 10) do
