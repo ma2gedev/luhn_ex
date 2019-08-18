@@ -37,6 +37,7 @@ defmodule Luhn.Mixfile do
   defp deps do
     [{:excoveralls, "~> 0.3", only: :dev},
      {:power_assert, "~> 0.1.2", only: :test},
+     {:ex_doc, ">= 0.0.0", only: :dev},
      {:benchfella, "~> 0.3", only: :bench}]
   end
 end
