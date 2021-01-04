@@ -10,21 +10,23 @@ Validate Luhn number.
 
 ## Installation
 
-```
+```elixir
 # mix.exs
 defp deps do
   [
     {:luhn, "~> 0.3.0"}
   ]
 end
+```
 
-# and fetch
+and fetch
+```bash
 $ mix deps.get
 ```
 
 ## How to use
 
-```
+```elixir
 # validate number
 Luhn.valid? "378282246310005"
 # => true
@@ -36,7 +38,7 @@ Luhn.valid? 378282246310005
 
 ## Benchmarking
 
-```
+```bash
 $ MIX_ENV=bench mix deps.get
 $ MIX_ENV=bench mix compile
 $ mix bench
