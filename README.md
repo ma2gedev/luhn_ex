@@ -4,7 +4,7 @@
 [![hex.pm daily downloads](https://img.shields.io/hexpm/dd/luhn.svg)](https://hex.pm/packages/luhn)
 [![hex.pm weekly downloads](https://img.shields.io/hexpm/dw/luhn.svg)](https://hex.pm/packages/luhn) 
 [![hex.pm downloads](https://img.shields.io/hexpm/dt/luhn.svg)](https://hex.pm/packages/luhn)
-[![Build Status](https://travis-ci.org/ma2gedev/luhn_ex.svg?branch=master)](https://travis-ci.org/ma2gedev/luhn_ex)
+[![Build Status](https://github.com/ma2gedev/luhn_ex/workflows/Elixir%20CI/badge.svg?branch=master)](https://github.com/ma2gedev/luhn_ex/actions?query=workflow%3A%22Elixir+CI%22)
 
 Validate Luhn number.
 
