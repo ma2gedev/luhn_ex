@@ -1,6 +1,8 @@
 defmodule LuhnTest do
   use ExUnit.Case
 
+  doctest Luhn
+
   test "American Express" do
     assert Luhn.valid? "378282246310005"
     assert Luhn.valid? "371449635398431"

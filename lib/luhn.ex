@@ -47,6 +47,45 @@ defmodule Luhn do
     |> rem(base)
   end
 
+  defp distance_from_base(checksum, _base) when checksum == 0, do: 0
+  defp distance_from_base(checksum,  base), do: base - checksum
+
+  @doc """
+  Calculates the check digit for a number prefix
+
+  # Example
+      # Accepts an integer
+      iex> Luhn.check_digit(37828224631000)
+      5
+
+      # Accepts an integer
+      iex> Luhn.check_digit(37828224631007)
+      0
+  """
+  @spec check_digit(integer, integer) :: integer
+  def check_digit(number, base \\ 10) when valid_base(base) do
+    number
+    |> Kernel.*(base)
+    |> checksum(base)
+    |> distance_from_base(base)
+  end
+
+  @doc """
+  Appends the check digit to a number prefix
+
+  # Example
+      # Accepts an integer
+      iex> Luhn.append_check_digit(37828224631000)
+      378282246310005
+  """
+  @spec append_check_digit(integer, integer) :: integer
+  def append_check_digit(number, base \\ 10) when valid_base(base) do
+    number
+    |> Integer.digits()
+    |> Kernel.++([check_digit(number, base)])
+    |> Integer.undigits()
+  end
+
   @spec double([integer, ...], integer, integer) :: integer
   def double([], _, acc), do: acc
   def double([x], _, acc), do: x + acc
