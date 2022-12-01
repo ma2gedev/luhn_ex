@@ -19,9 +19,6 @@ defmodule Luhn do
       iex(2)> Luhn.valid?(378282246310005)
       true
 
-      # Works with Hexadecimal as well
-      iex(3)> Luhn.valid?(0x1580BB2EA8875, 16)
-      true
   """
   @spec valid?(number :: integer | String.t, base :: integer) :: boolean
   def valid?(number, base \\ 10) when valid_base(base) do
@@ -29,6 +26,15 @@ defmodule Luhn do
     |> Kernel.==(0)
   end
 
+  @doc """
+  Calculate the checksum of a number.
+
+  This is known as the "mod 10" algorithm and the result will be zero if the
+  check digit suffix is valid for the number.
+
+      iex> Luhn.checksum("79927398713")
+      0
+  """
   def checksum(number, base \\ 10)
 
   @spec checksum(binary, integer) :: integer
@@ -47,6 +53,7 @@ defmodule Luhn do
     |> rem(base)
   end
 
+  @doc false
   @spec double([integer, ...], integer, integer) :: integer
   def double([], _, acc), do: acc
   def double([x], _, acc), do: x + acc
