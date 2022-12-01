@@ -47,6 +47,22 @@ defmodule Luhn.CheckTest do
     # end
   end
 
+  describe "Luhn.compute_check_digit/1" do
+    property "for known good numbers" do
+      forall n <- good_number() do
+        {num, check} = String.split_at(n, -1)
+        assert String.to_integer(check) == Luhn.compute_check_digit(num)
+      end
+    end
+
+    property "generates valid check digits in base 10" do
+      forall n <- numeric_10() do
+        check = Luhn.compute_check_digit(n)
+        assert Luhn.valid?(n <> to_string(check))
+      end
+    end
+  end
+
   describe "Generators" do
     property "single_digit_error/1 differ" do
       forall {a, b} <- single_digit_error(numeric_10()) do

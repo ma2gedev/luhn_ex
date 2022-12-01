@@ -14,7 +14,7 @@ This fork is available at `{:luhn60, "~> 1.3"}` and has these enhancements:
 
 - &#9745; CI for latest Elixir
 - &#9745; Property tests
-- &#9744; Compute check digit
+- &#9745; Compute check digit
 - &#9744; Append check digit
 - &#9744; Hexadecimal support
 
@@ -41,6 +41,10 @@ Luhn.valid? "378282246310005"
 # Integer type number
 Luhn.valid? 378282246310005
 # => true
+
+# Compute check digit
+Luhn.compute_check_digit("37828224631000")
+# => 5
 ```
 
 ## Benchmarking

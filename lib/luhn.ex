@@ -5,6 +5,11 @@ defmodule Luhn do
   Credit card numbers may be of arbitrary length and in arbitrary base.
   """
 
+  alias __MODULE__.Algorithm
+
+  @type check_digit :: non_neg_integer
+  @type input :: binary | integer
+
   defguardp valid_base(base) when base >= 2
 
   @doc """
@@ -53,6 +58,18 @@ defmodule Luhn do
     |> rem(base)
   end
 
+  @doc """
+  Compute the check digit of a number.
+
+      iex> Luhn.compute_check_digit("7992739871")
+      3
+
+      iex> Luhn.compute_check_digit(7992739871)
+      3
+  """
+  @spec compute_check_digit(input) :: check_digit
+  def compute_check_digit(n), do: Algorithm.compute_check_digit(n)
+
   @doc false
   @spec double([integer, ...], integer, integer) :: integer
   def double([], _, acc), do: acc
@@ -63,4 +80,37 @@ defmodule Luhn do
   defp sum(number, base) when number >= base, do: number - base + 1
   defp sum(number, _), do: number
 
+  defmodule Algorithm do
+    @moduledoc false
+
+    def compute_check_digit(n) do
+      sum = sum_digits(n)
+      rem(10 - (rem(sum, 10)), 10)
+    end
+
+    def sum_digits(n) when is_binary(n) do
+      rev_digits = n
+      |> String.graphemes()
+      |> List.foldl([], fn x, acc -> [String.to_integer(x) | acc] end)
+
+      sum_digits(rev_digits, 2)
+    end
+
+    def sum_digits(n) when is_integer(n) do
+      rev_digits = n |> Integer.digits() |> Enum.reverse()
+      sum_digits(rev_digits, 2)
+    end
+
+    def sum_digits([], _multiplier), do: 0
+
+    def sum_digits([x | xs], multiplier) do
+      case multiplier do
+        1 ->
+          x + sum_digits(xs, 2)
+        2 ->
+          sum = (x * multiplier) |> Integer.digits() |> Enum.sum()
+          sum + sum_digits(xs, 1)
+      end
+    end
+  end
 end

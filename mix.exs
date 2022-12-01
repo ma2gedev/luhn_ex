@@ -4,7 +4,7 @@ defmodule Luhn.Mixfile do
   def project do
     [
       app: :luhn60,
-      version: "1.3.3",
+      version: "1.3.4",
       elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       description: "Luhn algorithm in Elixir",
