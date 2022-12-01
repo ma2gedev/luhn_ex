@@ -17,21 +17,25 @@ jobs:
             otp: 20.3
           - elixir: 1.10.4
             otp: 21.3
-          - elixir: 1.11.4
+          - elixir: 1.11
             otp: 21.3
-          - elixir: 1.12.3
+          - elixir: 1.12
             otp: 22.3
-          - elixir: 1.13.1
+          - elixir: 1.13
             otp: 23.3
-          - elixir: 1.13.1
-            otp: 24.2
+          - elixir: 1.13
+            otp: 24.3
+          - elixir: 1.14
+            otp: 24.3
+          - elixir: 1.14
+            otp: 25.1
     steps:
     - uses: actions/checkout@v2
     - name: Set up Elixir
       uses: erlef/setup-beam@v1
       with:
-        elixir-version: ${{ matrix.elixir }} # Define the elixir version [required]
-        otp-version: ${{ matrix.otp }} # Define the OTP version [required]
+        elixir-version: ${{ matrix.elixir }}
+        otp-version: ${{ matrix.otp }}
     - name: Restore dependencies cache
       uses: actions/cache@v2
       with:
