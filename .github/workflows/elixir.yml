@@ -46,3 +46,7 @@ jobs:
       run: mix compile --warnings-as-errors
     - name: Run tests
       run: mix test
+      env:
+        PROPCHECK_NUMTESTS: 999
+        PROPCHECK_VERBOSE: 1
+

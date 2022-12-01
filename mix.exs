@@ -5,6 +5,7 @@ defmodule Luhn.Mixfile do
     [app: :luhn,
      version: "0.3.3",
      elixir: "~> 1.10",
+     elixirc_paths: elixirc_paths(Mix.env()),
      description: "Luhn algorithm in Elixir",
      package: [
        maintainers: ["Takayuki Matsubara"],
@@ -18,11 +19,8 @@ defmodule Luhn.Mixfile do
     ]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger], extra_applications: [:propcheck]]
   end
 
   # Dependencies can be Hex packages:
@@ -38,6 +36,10 @@ defmodule Luhn.Mixfile do
     [{:excoveralls, "~> 0.3", only: :dev},
      {:power_assert, "~> 0.2.1", only: :test},
      {:ex_doc, "~> 0.22.0", only: :dev, runtime: false},
-     {:benchfella, "~> 0.3", only: :bench}]
+     {:benchfella, "~> 0.3", only: :bench},
+     {:propcheck, "~> 1.4", only: [:test, :dev]}]
   end
+
+  defp elixirc_paths(:test), do: ["test/helpers"] ++ elixirc_paths(:prod)
+  defp elixirc_paths(_), do: ["lib"]
 end
