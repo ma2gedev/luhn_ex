@@ -70,6 +70,18 @@ defmodule Luhn do
   @spec compute_check_digit(input) :: check_digit
   def compute_check_digit(n), do: Algorithm.compute_check_digit(n)
 
+  @doc """
+  Compute and append the check digit for a given number.
+
+      iex> Luhn.append_check_digit("7992739871")
+      "79927398713"
+  """
+  @spec append_check_digit(binary) :: binary
+  def append_check_digit(n) do
+    check_digit = Algorithm.compute_check_digit(n)
+    n <> to_string(check_digit)
+  end
+
   @doc false
   @spec double([integer, ...], integer, integer) :: integer
   def double([], _, acc), do: acc

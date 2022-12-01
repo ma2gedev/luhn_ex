@@ -55,10 +55,19 @@ defmodule Luhn.CheckTest do
       end
     end
 
-    property "generates valid check digits in base 10" do
+    property "generates valid check digit in base 10" do
       forall n <- numeric_10() do
         check = Luhn.compute_check_digit(n)
         assert Luhn.valid?(n <> to_string(check))
+      end
+    end
+  end
+
+  describe "Luhn.append_check_digit/1" do
+    property "appends valid check digit in base 10" do
+      forall n <- numeric_10() do
+        n_checked = Luhn.append_check_digit(n)
+        assert Luhn.valid?(n_checked)
       end
     end
   end

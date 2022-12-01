@@ -15,7 +15,7 @@ This fork is available at `{:luhn60, "~> 1.3"}` and has these enhancements:
 - &#9745; CI for latest Elixir
 - &#9745; Property tests
 - &#9745; Compute check digit
-- &#9744; Append check digit
+- &#9745; Append check digit
 - &#9744; Hexadecimal support
 
 [![hex.pm version](https://img.shields.io/hexpm/v/luhn60.svg)](https://hex.pm/packages/luhn60)
