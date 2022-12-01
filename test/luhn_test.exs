@@ -41,6 +41,10 @@ defmodule LuhnTest do
     assert Luhn.valid? "4222222222222"
   end
 
+  test "Wikipedia" do
+    assert Luhn.valid? "79927398713"
+  end
+
   test "Integer" do
     assert Luhn.valid? 4111111111111111
   end
