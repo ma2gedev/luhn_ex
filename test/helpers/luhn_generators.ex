@@ -1,6 +1,9 @@
 defmodule Luhn.Generators do
   use PropCheck
 
+  @min_base 2
+  @max_base 36
+
   @doc "Good number from the Wikipedia article"
   def wikipedia_number, do: exactly("79927398713")
 
@@ -13,26 +16,41 @@ defmodule Luhn.Generators do
     elements(digits)
   end
 
-  @doc "Base 10 digit"
+  def digits(base) when base <= @max_base do
+    digits = for i <- 0..9, do: ?0 + i
+    letters = for i <- 10..(base-1), do: ?A + i - 10
+    elements(digits ++ letters)
+  end
+
+  @doc "Decimal digit (base 10)"
   def decimal_digit, do: digits(10)
 
-  @doc "Octal digit"
+  @doc "Octal digit (base 8)"
   def octal_digit, do: digits(8)
 
-  @doc "Numeric string (base 10)"
-  def numeric_10 do
-    let n <- choose(8, 19) do
-      let digits <- vector(n, decimal_digit()) do
-        to_string(digits)
-      end
-    end
-  end
+  @doc "Non-zero digit"
+  def nz_digit(gen), do: such_that(d <- gen, when: d != ?0)
 
   @doc "Numeric string of given chars"
   def numeric(digit_gen) do
     let n <- choose(2, 19) do
-      let digits <- vector(n, digit_gen) do
-        to_string(digits)
+      let {d, ds} <- {nz_digit(digit_gen), vector(n-1, digit_gen)} do
+        to_string([d|ds])
+      end
+    end
+  end
+
+  @doc "Numeric string (base 10)"
+  def numeric_10, do: numeric(decimal_digit())
+
+  @doc "Supported base"
+  def base, do: choose(@min_base, @max_base)
+
+  @doc "Base and numeric in that base"
+  def numeric_in_base do
+    let base <- base() do
+      let n <- numeric(digits(base)) do
+        {n, base}
       end
     end
   end

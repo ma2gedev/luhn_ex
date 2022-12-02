@@ -81,9 +81,17 @@ defmodule Luhn.CheckTest do
     end
 
     property "appends valid check digit octal" do
+      base = 8
       forall n <- numeric(octal_digit()) do
-        n_checked = Luhn.append_check_digit(n)
-        assert Luhn.valid?(n_checked)
+        n_checked = Luhn.append_check_digit(n, base)
+        assert Luhn.valid?(n_checked, base)
+      end
+    end
+
+    property "increases length by one digit" do
+      forall {n, base} <- numeric_in_base() do
+        n_checked = Luhn.append_check_digit(n, base)
+        assert String.length(n_checked) == (String.length(n) + 1)
       end
     end
   end
