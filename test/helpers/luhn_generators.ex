@@ -7,13 +7,31 @@ defmodule Luhn.Generators do
   @doc "Known good number with check digit"
   def good_number, do: elements(read_numbers())
 
+  @doc "Char digit for given base"
+  def digits(base) when base <= 10 do
+    digits = for i <- 0..(base - 1), do: ?0 + i
+    elements(digits)
+  end
+
   @doc "Base 10 digit"
-  def digit_10, do: elements(~c[0123456789])
+  def decimal_digit, do: digits(10)
+
+  @doc "Octal digit"
+  def octal_digit, do: digits(8)
 
   @doc "Numeric string (base 10)"
   def numeric_10 do
     let n <- choose(8, 19) do
-      let digits <- vector(n, digit_10()) do
+      let digits <- vector(n, decimal_digit()) do
+        to_string(digits)
+      end
+    end
+  end
+
+  @doc "Numeric string of given chars"
+  def numeric(digit_gen) do
+    let n <- choose(2, 19) do
+      let digits <- vector(n, digit_gen) do
         to_string(digits)
       end
     end
@@ -27,7 +45,7 @@ defmodule Luhn.Generators do
       let i <- choose(0, max - 1) do
         {xs, [y | ys]} = Enum.split(to_charlist(n), i)
 
-        let d <- such_that(d <- digit_10(), when: d != y) do
+        let d <- such_that(d <- decimal_digit(), when: d != y) do
           {n, to_string([xs | [d | ys]])}
         end
       end

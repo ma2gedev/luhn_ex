@@ -24,6 +24,10 @@ defmodule Luhn do
       iex(2)> Luhn.valid?(378282246310005)
       true
 
+      # Octal
+      iex(3)> Luhn.valid?("11111115", 8)
+      true
+
   """
   @spec valid?(number :: integer | String.t, base :: integer) :: boolean
   def valid?(number, base \\ 10) when valid_base(base) do
