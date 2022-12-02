@@ -95,33 +95,35 @@ defmodule Luhn do
   defmodule Algorithm do
     @moduledoc false
 
-    def compute_check_digit(n) do
-      sum = sum_digits(n)
-      rem(10 - (rem(sum, 10)), 10)
+    def compute_check_digit(n, base \\ 10) do
+      sum = sum_digits(n, base)
+      rem(base - (rem(sum, base)), base)
     end
 
-    def sum_digits(n) when is_binary(n) do
+    def sum_digits(n, base) when is_binary(n) do
       rev_digits = n
       |> String.graphemes()
-      |> List.foldl([], fn x, acc -> [String.to_integer(x) | acc] end)
+      |> List.foldl([], fn x, acc -> [String.to_integer(x, base) | acc] end)
 
-      sum_digits(rev_digits, 2)
+      digits = fn x -> Integer.digits(x, base) end
+      luhn_sum(rev_digits, 2, digits)
     end
 
-    def sum_digits(n) when is_integer(n) do
-      rev_digits = n |> Integer.digits() |> Enum.reverse()
-      sum_digits(rev_digits, 2)
+    def sum_digits(n, base) when is_integer(n) do
+      digits = fn x -> Integer.digits(x, base) end
+      rev_digits = n |> digits.() |> Enum.reverse()
+      luhn_sum(rev_digits, 2, digits)
     end
 
-    def sum_digits([], _multiplier), do: 0
+    def luhn_sum([], _multiplier, _digits), do: 0
 
-    def sum_digits([x | xs], multiplier) do
+    def luhn_sum([x | xs], multiplier, digits) do
       case multiplier do
         1 ->
-          x + sum_digits(xs, 2)
+          x + luhn_sum(xs, 2, digits)
         2 ->
-          sum = (x * multiplier) |> Integer.digits() |> Enum.sum()
-          sum + sum_digits(xs, 1)
+          sum = (x * multiplier) |> digits.() |> Enum.sum()
+          sum + luhn_sum(xs, 1, digits)
       end
     end
   end
