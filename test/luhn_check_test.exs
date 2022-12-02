@@ -29,6 +29,15 @@ defmodule Luhn.CheckTest do
       end
     end
 
+    property "for any octal string" do
+      forall n <- numeric(octal_digit()) do
+        case Luhn.valid?(n) do
+          true -> collect(true, :valid)
+          false -> collect(true, :invalid)
+        end
+      end
+    end
+
     property "detects single digit errors" do
       forall {n, n_corrupt} <- single_digit_error(good_number()) do
         assert n != n_corrupt
@@ -66,6 +75,13 @@ defmodule Luhn.CheckTest do
   describe "Luhn.append_check_digit/1" do
     property "appends valid check digit in base 10" do
       forall n <- numeric_10() do
+        n_checked = Luhn.append_check_digit(n)
+        assert Luhn.valid?(n_checked)
+      end
+    end
+
+    property "appends valid check digit octal" do
+      forall n <- numeric(octal_digit()) do
         n_checked = Luhn.append_check_digit(n)
         assert Luhn.valid?(n_checked)
       end
